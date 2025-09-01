@@ -1,11 +1,20 @@
 from sys import path
+def hamtaSyror() -> str:
+    '''Försöker hämta syror från filen aminosyror.txt'''
+    # Vi börjar med att öppna filen
+    try:
+        with open('aminosyror.txt') as f:
+            syror_i_ordning = f.read().replace('\t', '').replace('\n', '\n')
+    except FileNotFoundError:
+        exit(f'File aminosyror.txt not found in {path[0].split('/')[-1]}')
+    return syror_i_ordning
 
-# Vi börjar med att öppna filen
-try:
-    with open('aminosyror.txt') as f:
-        syror_i_ordning = f.read().replace('\t', '').replace('\n', '\n')
-except FileNotFoundError:
-    exit(f'File aminosyror.txt not found in {path[0].split('/')[-1]}')
+def printaVal():
+    print("""Välj ett av följande:
+        1 - Lista alla aminosyror
+        2 - Spara en sekvens av aminosyror (peptid)
+        3 - Lista alla sekvenser sorterare i viktordning
+    4 - Avsluta""")
 
 # Denna tar bort 
 def formatera_lista(syror_i_ordning:str) -> list[list[str]]:
@@ -31,14 +40,17 @@ def add_value_sequence_to_list(sekvens:str):
         pass
 
 def mainloop():
-    global CHOOSE_COMMAND, syror_i_ordning
-    choice:int = 5 # värde som inte gör något
+    global CHOOSE_COMMAND
+    syror_i_ordning = hamtaSyror()
+    choice:int = 1 # värde som inte gör något
     while choice:
+        printaVal()
         match choice:
             case 1:
                 print(syror_i_ordning)
             case 2:
                 add_value_sequence_to_list(input('Ange en sekvens:\n'))
+
         choice = input(CHOOSE_COMMAND)
 
 if __name__ == '__main__':

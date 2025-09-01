@@ -4,11 +4,11 @@ class country:
         self.population = population
         self.landlocked = landlocked
         
-def split_line(line):
+def split_line(line:str):
     parts = []
     # Split line by commas, and then strip away white spaces
     for part in line.split(","):
-        part = part.strip()
+        part:str = part.strip()
         parts.append(part)
         
     return parts
@@ -26,7 +26,7 @@ def get_data_from_file(path: str):
         
         # Four data items for each country
         if len(parts) < 4:
-            continue
+            continue # skip if data is odd
         
         # Map the data
         name = parts[0]

@@ -18,7 +18,7 @@ def inmatning(): # Gathers input data
     # Creata and populate m_inputs
     m_inputs = list()
     for i in range(participants_num):
-        m = int(input(f"Ange för deltagare {i+1} (m): "))
+        m = float(input(f"Ange för deltagare {i+1} (m): "))
         m_inputs.append(m)
     
     return m_inputs

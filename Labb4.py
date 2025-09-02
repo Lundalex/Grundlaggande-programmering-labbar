@@ -21,7 +21,7 @@ def get_data_from_file(path: str):
     
     # Extract the data for each line  of text (each country)
     countries = []
-    for line in lines[1:]:
+    for line in lines:
         parts = split_line(line)
         
         # Four data items for each country
@@ -57,11 +57,14 @@ def print_countries(countries):
         print_green(country.name)
         
 def print_stats_from_countries(countries):
+    
+    # Calculate stats
     num_countries = len(countries)
     tot_population = 0
     for country in countries:
         tot_population += country.population
-        
+    
+    # Print stats
     print_green(f"Totalt bor i dessa {num_countries} länder {tot_population} människor")
     
 # Main program:

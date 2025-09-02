@@ -24,7 +24,6 @@ def inmatning(): # Gathers input data
     return m_inputs
 
 def statistik(): # Calculates and shows statistics data
-    
     # Validate data
     participants_num = len(m_participants)
     if (participants_num <= 0):

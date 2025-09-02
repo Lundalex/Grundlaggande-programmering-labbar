@@ -2,10 +2,14 @@
 printa_st: int = 7
 
 def lasInOrdenFranFil(fil:str, ord:bool = False) -> str:
+    def replace_many(text:str,ersätt_lista:list):
+        for sträng in ersätt_lista:
+            text = text.replace(sträng, '')
+        return text
     with open(fil, 'r') as f:
         text = f.read()
     if not ord: # tar bort lite skräp om det är från artikeln. Måste göras innan split.
-        text = text.replace('.', '').replace(',', '').replace('-', '').replace('–', '').replace('?', '').replace(':', '')
+        text = replace_many(text, ['.', ',', '-', '–', ':'])
     # delar upp orden ord för ord.
     split_text = text.lower().replace('\n',' ').split(' ')
     return split_text

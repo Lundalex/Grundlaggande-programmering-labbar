@@ -7,6 +7,7 @@ omloppstid = float(input("Ange omloppstid (s): "))
 
 # Lambda dunction for mass
 massa = lambda d, T: d * T
-
-# Calculate and print the earth's mass
-print("Jordens massa: " + str(massa(avstånd, omloppstid)) + " gk")
+fix
+if __name__ == '__main__':
+    # Calculate and print the earth's mass
+    print("Jordens massa: " + str(massa(avstånd, omloppstid)) + " gk") f string

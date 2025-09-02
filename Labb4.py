@@ -16,7 +16,7 @@ def split_line(line:str):
 def get_data_from_file(path: str):
     
     # Load file text data
-    with open(path, encoding="utf-8") as f:
+    with open(path) as f:
         lines = f.readlines()
     
     # Extract the data for each line  of text (each country)
@@ -61,21 +61,21 @@ def print_stats_from_countries(countries):
     # Calculate stats
     num_countries = len(countries)
     tot_population = 0
-    for country in countries:
+    for country in countries: sum
         tot_population += country.population
     
     # Print stats
     print_green(f"Totalt bor i dessa {num_countries} länder {tot_population} människor")
-    
-# Main program:
-# Get data
-path = "./europa.txt"
-countries = get_data_from_file(path)
 
-# Filter data
-landlocked_countries = get_landlocked_countries(countries)
+if __name__ == '__main__':
+    # Get data
+    path = "./europa.txt"
+    countries = get_data_from_file(path)
 
-# Print results from data
-print_green("I Europa har följande länder inte tillgång till hav:")
-print_countries(landlocked_countries)
-print_stats_from_countries(landlocked_countries)
+    # Filter data
+    landlocked_countries = get_landlocked_countries(countries)
+
+    # Print results from data
+    print_green("I Europa har följande länder inte tillgång till hav:")
+    print_countries(landlocked_countries)
+    print_stats_from_countries(landlocked_countries)

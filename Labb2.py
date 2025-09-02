@@ -5,7 +5,7 @@ def print_menu():
 1 - Mata in de tävlandes resultat.
 2 - Se statistik för tidigare inmatade
 3 - Avsluta""")
-    
+
 def get_standard_deviation(values, mean, num):
     # Calculate variance from this formula: https://stackoverflow.com/questions/35583302/how-can-i-calculate-the-variance-of-a-list-in-python
     # (fancy syntax for a for loop)
@@ -31,33 +31,28 @@ def statistik(): # Calculates and shows statistics data
         return
     
     # Calculate the mean and max values
-    sum = 0.0
-    min_m = math.inf
-    max_m = 0.0
-    for i in range(participants_num):
-        m = m_participants[i]
-        sum += m
-        min_m = min(min_m, m)
-        max_m = max(max_m, m)
-    mean = sum / participants_num
+    min_m = min(*m_participants)
+    max_m = max(*m_participants)
+    mean = sum(m_participants) / participants_num
     
     # Calculate the standard deviation
     standard_deviation = get_standard_deviation(m_participants, mean, participants_num)
     
     print(f"Medelvärdet är {mean:.2f}m med standardavvikelse {standard_deviation:.2f}m. Högsta värde var {max_m:.2f}m och det lägsta {min_m:.2f}m")
      
-# "main" loop:
-m_participants = list()
-while (True):
-    print_menu()
-    choice = int(input("Ditt val: "))
-    
-    # Choice 3
-    if (choice == 3):
-        exit()
-    
-    # Choice 1
-    if (choice == 1): m_participants = inmatning()
-    
-    # Choice 2
-    else: statistik()
+if __name__ == '__main__':
+    m_participants = list()
+    while (True):
+        print_menu()
+        choice = int(input("Ditt val: "))
+        
+        # Choice 3
+        # I could also use match if on pyhton 1.13
+        if (choice == 3):
+            exit()
+        
+        # Choice 1
+        if (choice == 1): m_participants = inmatning()
+        
+        # Choice 2
+        else: statistik()

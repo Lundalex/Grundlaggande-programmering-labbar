@@ -60,9 +60,7 @@ def print_stats_from_countries(countries):
     
     # Calculate stats
     num_countries = len(countries)
-    tot_population = 0
-    for country in countries: sum
-        tot_population += country.population
+    tot_population = sum([x.population for x in countries])
     
     # Print stats
     print_green(f"Totalt bor i dessa {num_countries} länder {tot_population} människor")

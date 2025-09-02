@@ -7,14 +7,16 @@ def hamtaSyror() -> str:
             syror_i_ordning = f.read().replace('\t', '').replace('\n', '\n')
     except FileNotFoundError:
         exit(f'File aminosyror.txt not found in {path[0].split('/')[-1]}')
+    print('reading aminoacids...\n...done.')
     return syror_i_ordning
 
-def printaVal():
-    print("""Välj ett av följande:
-        1 - Lista alla aminosyror
-        2 - Spara en sekvens av aminosyror (peptid)
-        3 - Lista alla sekvenser sorterare i viktordning
-    4 - Avsluta""")
+def hämtaVal():
+    val = int(input("""Välj ett av följande:
+    1 - Lista alla aminosyror
+    2 - Spara en sekvens av aminosyror (peptid)
+    3 - Lista alla sekvenser sorterare i viktordning
+    4 - Avsluta\n"""))
+    return val
 
 # Denna tar bort 
 def formatera_lista(syror_i_ordning:str) -> list[list[str]]:
@@ -22,30 +24,37 @@ def formatera_lista(syror_i_ordning:str) -> list[list[str]]:
     syralista1:list[str] = syror_i_ordning.replace('\t','').split('\n')
     ny_fixad_syralista = []
     for syra in syralista1:
-        ny_fixad_syralista.append(syra.split()) # lägger till delarna när alla mellanslag tagits bort och den har splittats där dem var.
-    return ny_fixad_syralista
+        splittad_syra = syra.split() # ex: ['P', 'Prolin', 'hydrofob', '115.13']
+        if len(splittad_syra) != 4:
+            continue
+        ny_fixad_syralista.append((splittad_syra[0], splittad_syra[-1])) # tar med bokstav och nummer för senare beräkningar
+    return ny_fixad_syralista[:-1]# tar bort sista för blankraden
 
-# lite variabler som används senare
-list_of_sequences:list = []
-
-def add_value_sequence_to_list(sekvens:str):
-    global list_of_sequences
-    for char in sekvens:
-        pass
-
+def add_value_sequence_to_list(skapad_sekvens, syror_lista:list):
+    totalt_värde:float = 0
+    for char in skapad_sekvens:
+        bokstavs_lista = [par[0] for par in syror_lista]
+        index_of_bokstav = bokstavs_lista.index(char)
+        värde = syror_lista[index_of_bokstav][1]
+        totalt_värde+= float(värde)
+    return totalt_värde
 def mainloop():
-    global CHOOSE_COMMAND
+    sekvenser = {}
     syror_i_ordning = hamtaSyror()
-    choice:int = 1 # värde som inte gör något
+    syror_lista = formatera_lista(syror_i_ordning)
+    choice = 1 # arbiträrt nummer != 0. Uppdateras sen
     while choice:
-        printaVal()
+        choice = hämtaVal()
         match choice:
             case 1:
                 print(syror_i_ordning)
             case 2:
-                add_value_sequence_to_list(input('Ange en sekvens:\n'))
-
-        choice = input(CHOOSE_COMMAND)
+                sekvens = input('Ange en sekvens:\n')
+                värde = add_value_sequence_to_list(sekvens, syror_lista)
+                sekvenser[sekvens] = värde
+            case 3:
+                for sekvens in sekvenser.keys():
+                    print(f'{sekvens}:{round(värde,2)}')
 
 if __name__ == '__main__':
     mainloop()

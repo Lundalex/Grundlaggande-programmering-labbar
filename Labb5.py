@@ -26,12 +26,6 @@ def formatera_lista(syror_i_ordning:str) -> list[list[str]]:
     return ny_fixad_syralista
 
 # lite variabler som används senare
-syralista = formatera_lista(syror_i_ordning)
-CHOOSE_COMMAND: str = """Välj ett av följande:
-1 - Lista alla aminosyror
-2 - Spara en sekvens av aminosyror (peptid)
-3 - Lista alla sekvenser sorterare i viktordning
-4 - Avsluta"""
 list_of_sequences:list = []
 
 def add_value_sequence_to_list(sekvens:str):

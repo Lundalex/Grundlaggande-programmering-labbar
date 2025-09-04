@@ -41,7 +41,7 @@ def statistik(): # Calculates and shows statistics data
     print(f"Medelvärdet är {mean:.2f}m med standardavvikelse {standard_deviation:.2f}m. Högsta värde var {max_m:.2f}m och det lägsta {min_m:.2f}m")
      
 if __name__ == '__main__':
-    m_participants = list()
+    m_participants = []
     while (True):
         print_menu()
         choice = int(input("Ditt val: "))

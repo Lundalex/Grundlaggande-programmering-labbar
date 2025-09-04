@@ -6,7 +6,7 @@ G = 6.674 * pow(10, -11)
 avstånd = float(input("Ange avstånd (km): "))*1000
 omloppstid = float(input("Ange omloppstid (dygn): "))*24*60**2
 
-# Lambda dunction for mass
+# Lambda function for mass
 massa = (4*pow(pi,2)*pow(avstånd,3))/(G*pow(omloppstid,2))
 # fix
 if __name__ == '__main__':

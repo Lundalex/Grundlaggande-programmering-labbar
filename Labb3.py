@@ -1,5 +1,5 @@
 # hur många av orden som ska printas
-printa_st: int = 7
+printa_st: int = 500
 
 def lasInOrdenFranFil(fil:str, ord:bool = False) -> str:
     def replace_many(text:str,ersätt_lista:list):
@@ -9,7 +9,7 @@ def lasInOrdenFranFil(fil:str, ord:bool = False) -> str:
     with open(fil, 'r') as f:
         text = f.read()
     if not ord: # tar bort lite skräp om det är från artikeln. Måste göras innan split.
-        text = replace_many(text, ['.', ',', '-', '–', ':'])
+        text = replace_many(text, ['.', ',', '-', '–', ':','(',')'])
     # delar upp orden ord för ord.
     split_text = text.lower().replace('\n',' ').split(' ')
     return split_text
@@ -34,10 +34,11 @@ def raknaOvanliga(artikel:list[str], unika_ord:str) -> list:
 def printaLista(lista):
     global printa_st
     for par in lista[:printa_st]:
-        print(f'Ordet "{par[0]}" förekommer {par[1]} st gånger')
+        print(f'\033[91m Ordet "{par[0]}" förekommer {par[1]} st gånger \033[0m')
 
 if __name__ == '__main__':
-    fil_granska = input('Ange en fil att granska: ')
+    print('\033[91m Ange en fil att granska: ' + '\033[0m')
+    fil_granska = (input("\033[32m") + "\033[0m")[:-4]
     artikel = lasInOrdenFranFil(fil=fil_granska)
     vanliga_ord = lasInOrdenFranFil(fil='vanligaord.txt', ord=True)
     artikel = rensaVanligaOrd(artikel, vanliga_ord)

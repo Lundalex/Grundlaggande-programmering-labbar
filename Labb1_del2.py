@@ -11,4 +11,4 @@ if __name__ == '__main__':
     omloppstid = float(input("Ange omloppstid (dygn): "))*24*60**2
 
     # Calculate and print the earth's mass
-    print(f"Jordens massa: {massa(avstånd, omloppstid):.2e} k")
+    print(f"Jordens massa: {massa(avstånd, omloppstid):.2e} kg")

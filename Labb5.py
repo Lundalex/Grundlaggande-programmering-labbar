@@ -1,10 +1,9 @@
 from sys import path
-from termcolor import cprint, colored
 def hamtaSyror() -> str:
     '''Försöker hämta syror från filen aminosyror.txt'''
     # Vi börjar med att öppna filen
     try:
-        cprint('reading aminoacids...\n...done.', color='red')
+        print('\033[91m reading aminoacids...\n...done.'+'\033[0m')
         with open('aminosyror.txt') as f:
             SYROR_I_ORDNING = f.read()
     except FileNotFoundError:
@@ -12,12 +11,15 @@ def hamtaSyror() -> str:
     return SYROR_I_ORDNING
 
 def hämtaVal():
-    val = print(colored("""Välj ett av följande:
+
+    print("""\033[91m Välj ett av följande:
     1 - Lista alla aminosyror
     2 - Spara en sekvens av aminosyror (peptid)
     3 - Lista alla sekvenser sorterare i viktordning
-    4 - Avsluta\n""", color='red'))
-    val = input("\033[32m") + "\033[0m" # skumma karaktärer här för att ta in i färg grön
+    4 - Avsluta\n"""+"\033[0m")
+    
+
+    val = input("\033[32m") + "\033[0m" # skumma bokstäver här för att ta in i färg grön
     return int(val[:-4])
 
 # Denna tar bort 
@@ -51,15 +53,15 @@ def mainloop():
         choice = hämtaVal()
         match choice:
             case 1:
-                cprint(SYROR_I_ORDNING, color='light_red')
+                print("\033[91m"+SYROR_I_ORDNING+"\033[0m")
             case 2:
-                cprint('Ange en sekvens:', color='red')
+                print('\033[91m Ange en sekvens:'+'\033[0m')
                 sekvens = (input("\033[32m") + "\033[0m")[:-4] # skumma karaktärer här för att ta in i färg grön
                 värde = add_value_sequence_to_list(sekvens, syror_lista)
                 sekvenser[sekvens] = värde
             case 3:
                 for sekvens in sekvenser.keys():
-                    cprint(f'{sekvens}:{round(sekvenser[sekvens],2)}',color='light_red')
+                    print(f'\033[91m {sekvens}:{round(sekvenser[sekvens],2)}'+ '\033[0m')
             case 4:
                 choice = 0
 

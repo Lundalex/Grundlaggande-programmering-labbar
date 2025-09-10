@@ -22,8 +22,8 @@ def hämtaVal():
     val = input("\033[32m") + "\033[0m" # skumma bokstäver här för att ta in i färg grön
     return int(val[:-4])
 
-# Denna tar bort 
 def formatera_lista(SYROR_I_ORDNING:str) -> list[list[str]]:
+    '''Formaterar listan så vi kan använda den senare'''
     # tar bort skumma karaktärer som '\t' och delar sedan upp stringen för varje ny rad 
     syralista1:list[str] = SYROR_I_ORDNING.split('\n')
     ny_fixad_syralista = []
@@ -35,6 +35,7 @@ def formatera_lista(SYROR_I_ORDNING:str) -> list[list[str]]:
     return ny_fixad_syralista # tar bort sista för blankraden
 
 def add_value_sequence_to_list(skapad_sekvens, syror_lista:list):
+    '''Tar alla värden som vi har för varje bokstav och adderar dem.'''
     totalt_värde:float = 0
     bokstavs_lista = [par[0] for par in syror_lista]
     for char in skapad_sekvens:
@@ -48,7 +49,7 @@ def mainloop():
     sekvenser = {}
     SYROR_I_ORDNING = hamtaSyror()
     syror_lista = formatera_lista(SYROR_I_ORDNING)
-    choice = 1 # arbiträrt nummer != 0. Uppdateras sen
+    choice = 1 # arbiträrt nummer != 0 för att få igång loopen. Uppdateras sen
     while choice:
         choice = hämtaVal()
         match choice:
@@ -58,12 +59,12 @@ def mainloop():
                 print('\033[91m Ange en sekvens:'+'\033[0m')
                 sekvens = (input("\033[32m") + "\033[0m")[:-4] # skumma karaktärer här för att ta in i färg grön
                 värde = add_value_sequence_to_list(sekvens, syror_lista)
-                sekvenser[sekvens] = värde
+                sekvenser[sekvens] = värde # lägger in värden i en dictionary
             case 3:
-                for sekvens in sekvenser.keys():
+                for sekvens in sekvenser.keys(): # tar varje sekvens och listar värdena
                     print(f'\033[91m {sekvens}:{round(sekvenser[sekvens],2)}'+ '\033[0m')
             case 4:
-                choice = 0
+                choice = 0 # avslutar while loopen genom att sätta choice = 0
 
 if __name__ == '__main__':
     mainloop()

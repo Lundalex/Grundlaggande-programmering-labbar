@@ -38,7 +38,7 @@ def get_data_from_file(path: str):
 
     return countries
 
-def get_landlocked_countries(countries):
+def get_landlocked_countries(countries: list[country]):
     landlocked_countries = []
     for country in countries:
         if (country.landlocked):
@@ -46,11 +46,11 @@ def get_landlocked_countries(countries):
             
     return landlocked_countries
 
-def green_str(str: str):
-    return "\033[92m" + str + "\033[0m"
+def green_str(string: str):
+    return "\033[92m" + string+ "\033[0m"
 
-def print_green(str: str):
-    print(green_str(str))
+def print_green(string: str):
+    print(green_str(string))
 
 def print_countries(countries):
     for country in countries:

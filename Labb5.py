@@ -18,7 +18,6 @@ def hämtaVal():
     3 - Lista alla sekvenser sorterare i viktordning
     4 - Avsluta\n"""+"\033[0m")
     
-
     val = input("\033[32m") + "\033[0m" # skumma bokstäver här för att ta in i färg grön
     return int(val[:-4])
 
@@ -47,23 +46,23 @@ def mainloop():
     # variabler
     sekvenser = {}
     SYROR_I_ORDNING = hamtaSyror()
-    syror_lista = formatera_lista(SYROR_I_ORDNING)
+    syror_lista = formatera_lista(SYROR_I_ORDNING) # fixa listan
     choice = 1 # arbiträrt nummer != 0. Uppdateras sen
     while choice:
         choice = hämtaVal()
         match choice:
-            case 1:
+            case 1: # se vilka syror som finns
                 print("\033[91m"+SYROR_I_ORDNING+"\033[0m")
-            case 2:
+            case 2: # 
                 print('\033[91m Ange en sekvens:'+'\033[0m')
                 sekvens = (input("\033[32m") + "\033[0m")[:-4] # skumma karaktärer här för att ta in i färg grön
-                värde = add_value_sequence_to_list(sekvens, syror_lista)
+                värde = add_value_sequence_to_list(sekvens, syror_lista) # sumermar flot-värden för varje vald aminosyra
                 sekvenser[sekvens] = värde
-            case 3:
+            case 3: # Visa alla sekvenser med värden (t.ex AAB : 276.2)
                 for sekvens in sekvenser.keys():
                     print(f'\033[91m {sekvens}:{round(sekvenser[sekvens],2)}'+ '\033[0m')
             case 4:
-                choice = 0
+                choice = 0 # 0 -> while (False) -> programmet avslutas
 
 if __name__ == '__main__':
     mainloop()

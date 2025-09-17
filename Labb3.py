@@ -25,7 +25,7 @@ def rensaVanligaOrd(artikel:list[str], vanliga_ord:list[str]) -> list:
         filtrerade_ord.append(word)
    return filtrerade_ord 
 
-def raknaOvanliga(artikel:list[str], unika_ord:str) -> list:
+def raknaOvanliga(artikel:list[str], unika_ord:list[str]) -> list:
     for i,ord in enumerate(unika_ord):       
         # Vi ersätter unika ordet med [unika ordet, antal av det i artikeln] 
         unika_ord[i] = (ord, artikel.count(ord))

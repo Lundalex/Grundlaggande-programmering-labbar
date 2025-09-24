@@ -18,8 +18,8 @@ def hämtaVal():
     3 - Lista alla sekvenser sorterare i viktordning
     4 - Avsluta\n"""+"\033[0m")
     
-    val = input("\033[32m") + "\033[0m" # skumma bokstäver här för att ta in i färg grön
-    return int(val[:-4])
+    val = (input("\033[32m") + "\033[0m")[:-4] # skumma bokstäver här för att ta in i färg grön
+    return int(val)
 
 def formatera_lista(SYROR_I_ORDNING:str) -> list[list[str]]:
     '''Formaterar listan så vi kan använda den senare'''

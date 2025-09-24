@@ -1,4 +1,4 @@
-class country:
+class Country:
     def __init__(self, name: str, population: int, landlocked: bool):
         self.name = name
         self.population = population
@@ -13,7 +13,7 @@ def split_line(line:str):
         
     return parts
         
-def get_data_from_file(path: str):
+def get_data_from_file(path: str) -> list[Country]:
     
     # Load file text data
     with open(path) as f:
@@ -34,11 +34,11 @@ def get_data_from_file(path: str):
         population = int(parts[2])
         landlocked = (parts[3] == "Y")
 
-        countries.append(country(name, population, landlocked))
+        countries.append(Country(name, population, landlocked))
 
     return countries
 
-def get_landlocked_countries(countries: list[country]):
+def get_landlocked_countries(countries: list[Country]) -> list[Country]:
     landlocked_countries = []
     for country in countries:
         if (country.landlocked):
@@ -52,11 +52,11 @@ def green_str(string: str):
 def print_green(string: str):
     print(green_str(string))
 
-def print_countries(countries):
+def print_countries(countries:list[Country]):
     for country in countries:
         print_green(country.name)
         
-def print_stats_from_countries(countries):
+def print_stats_from_countries(countries: list[Country]):
     
     # Calculate stats
     num_countries = len(countries)
